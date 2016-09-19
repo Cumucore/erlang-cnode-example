@@ -7,9 +7,10 @@ bar(Y) ->
     call_cnode({bar, Y}).
 
 call_cnode(Msg) ->
-    {ok, Hostname} = inet:gethostname(),
+    %%{ok, Hostname} = inet:gethostname(),
+    Hostname = "localhost",
     {any, list_to_atom(lists:append(["c1@", Hostname]))} ! {call, self(), Msg},
     receive
-	{cnode, Result} ->
-	    Result
+    {cnode, Result} ->
+        Result
     end.
