@@ -7,7 +7,7 @@ bin/%.beam:	src/%.erl
 
 bin/%:	src/%.c
 	mkdir -p bin
-	gcc -o $@ -I$(OTPROOT)/include -L$(OTPROOT)/lib src/complex.c $< -lerl_interface -lei -lpthread -lnsl
+	gcc -o $@ -I$(OTPROOT)/include -L$(OTPROOT)/lib src/complex.c $< -lerl_interface -lei -lpthread -lnsl -levent
 
 clean:
 	rm -rf bin
