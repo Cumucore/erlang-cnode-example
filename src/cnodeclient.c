@@ -43,24 +43,24 @@ int main(int argc, char **argv) {
     } else {
 
       if (emsg.type == ERL_REG_SEND) {
-    fromp = erl_element(2, emsg.msg);
-    tuplep = erl_element(3, emsg.msg);
-    fnp = erl_element(1, tuplep);
-    argp = erl_element(2, tuplep);
+        fromp = erl_element(2, emsg.msg);
+        tuplep = erl_element(3, emsg.msg);
+        fnp = erl_element(1, tuplep);
+        argp = erl_element(2, tuplep);
 
-    if (strncmp(ERL_ATOM_PTR(fnp), "foo", 3) == 0) {
-      res = foo(ERL_INT_VALUE(argp));
-    } else if (strncmp(ERL_ATOM_PTR(fnp), "bar", 3) == 0) {
-      res = bar(ERL_INT_VALUE(argp));
-    }
+        if (strncmp(ERL_ATOM_PTR(fnp), "foo", 3) == 0) {
+          res = foo(ERL_INT_VALUE(argp));
+        } else if (strncmp(ERL_ATOM_PTR(fnp), "bar", 3) == 0) {
+          res = bar(ERL_INT_VALUE(argp));
+        }
 
-    resp = erl_format("{cnode, ~i}", res);
-    erl_send(fd, fromp, resp);
+        resp = erl_format("{cnode, ~i}", res);
+        erl_send(fd, fromp, resp);
 
-    erl_free_term(emsg.from); erl_free_term(emsg.msg);
-    erl_free_term(fromp); erl_free_term(tuplep);
-    erl_free_term(fnp); erl_free_term(argp);
-    erl_free_term(resp);
+        erl_free_term(emsg.from); erl_free_term(emsg.msg);
+        erl_free_term(fromp); erl_free_term(tuplep);
+        erl_free_term(fnp); erl_free_term(argp);
+        erl_free_term(resp);
       }
     }
   }
